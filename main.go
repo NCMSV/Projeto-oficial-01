@@ -2,15 +2,14 @@ package main
 
 import (
 	"encoding/json"
-	"net/http"
 	"fmt"
-	"github.com/br/NCMSV/Projeto-oficial-01/domain"
-
+	"net/http"
 )
 
 func main(){
 	http.HandleFunc("/person/", func(w http.ResponseWriter, r *http.Request){
-		if r.Method =="POST" {
+		if r.Method == "POST" {
+		
 			// Criação da pessoa
 			var person domain.Person
 
@@ -21,7 +20,7 @@ func main(){
 				return
 			}
 			if person.ID <= 0 {
-				http.Error(w, "Error trying to create person. ID should be a positive integer", http.StatusBadRequest)
+				http.Error(w, "Error trying to create person. Username should be a positive integer", http.StatusBadRequest)
 				return
 			}
 			///Criar pessoa
