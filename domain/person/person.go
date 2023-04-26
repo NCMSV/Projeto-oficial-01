@@ -44,6 +44,11 @@ func NewService(dbFilePath string) (Service, error) {
 	var allPeople domain.People
 	json.Unmarshal(jsonFileContentByte, allPeople)
 	//Se existir, leia o arquivo e atualizo a variável people do serviço com as pessoas do arquivo
+
+	return Service{
+		dbFilePath: dbFilePath,
+		people:     domain.People{},
+	}, nil
 }
 
 func createEmptyFile(dbFilePath string) error {
@@ -64,7 +69,7 @@ func createEmptyFile(dbFilePath string) error {
 
 ////criação de pessoa
 
-func (s *Service) create(person domain.Person) error {
+func (s *Service) Create(person domain.Person) error {
 	//verificar se a pessoa já existe, se já existe então retorna o erro
 	if s.exists(person) {
 		return fmt.Errorf("Error trying to create person. There is a person with this ID already registered")
